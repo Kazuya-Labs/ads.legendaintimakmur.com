@@ -1,35 +1,58 @@
+
 ---
+// IMPORT UTAMA KOMPONEN LANDING PAGE
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
-import Navbar from '../components/Navbar.astro'
-import Hero from '../components/Hero.astro'
-import Tursbar from "../components/Tursbar.astro";
-import Portfolio from '../components/Portfolio.astro'
-import Testimonial from '../components/Testimonial.astro'
-import Kontak from '../components/Kontak.astro'
-import Footer from '../components/Footer.astro'
-import Faq from '../components/Faq.astro'
-import CtaFix from '../components/CtaFix.astro'
-import DokumentasiGudang from '../components/Dokumentasi_gudang.astro'
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Tursbar from "../components/Tursbar.astro"; // Komponen Fokus Pelayanan / Keunggulan
+import RekamJejak from '../components/Portfolio.astro'; // Mengubah alias agar sinkron dengan ID #rekam-jejak di Navbar
+import Testimonial from '../components/Testimonial.astro';
+import Kontak from '../components/Kontak.astro';
+import Footer from '../components/Footer.astro';
+import Faq from '../components/Faq.astro';
+import CtaFix from '../components/CtaFix.astro'; // Komponen Floating WhatsApp Button
+import DokumentasiGudang from '../components/Dokumentasi_gudang.astro';
 
+// VARIABEL GLOBAL (Dapat diturunkan ke komponen anak jika diperlukan via Props)
 const whatsapp = "6282221155363";
 ---
 
 <Layout
-  title="PT Legenda Inti Makmur | Solusi Alat Kebersihan & Perabotan Plastik Terbaik"
-  description="PT Legenda Inti Makmur menghadirkan produk plastik dan alat kebersihan berkualitas tinggi untuk rumah tangga dan industri yang awet, fungsional, dan inovatif."
+  title="Grosir Perabot & Alat Kebersihan Tangan Pertama | PT Legenda Inti Makmur"
+  description="Supplier tangan pertama alat pel, keset, dan perabot unik terlengkap di Banyumas. Stok melimpah, siap kirim kargo nasional. Join grup grosir sekarang!"
   canonicalURL={String(Astro.url)}
 >
-  <!-- Perbaikan Aksesibilitas & Performa Navigasi -->
-  <Navbar/>
-  <Hero/>
-  <CtaFix/>
-  <Tursbar/>
-<DokumentasiGudang/>
-  <Portfolio/>
-  <Testimonial/>
-  <Faq/>
-  <Kontak/>
-  <Footer/>
+  
+  <!-- Komponen Navigasi Utama -->
+  <Navbar />
+  
+  <!-- Halaman Atas (Hero Section) -->
+  <Hero />
+  
+  <!-- Floating/Sticky CTA Button (WhatsApp Widget) -->
+  <CtaFix />
+  
+  <!-- Fokus Pelayanan & Keunggulan Suplai Grosir -->
+  <Tursbar />
+  
+  <!-- Bukti Fisik Gudang & Facebook Reel Official -->
+  <DokumentasiGudang />
+  
+  <!-- Rekam Jejak Logistik & Distribusi Kargo Nasional -->
+  <RekamJejak />
+  
+  <!-- Ulasan Jujur Pemilik Toko & Agen Daerah -->
+  <Testimonial />
+  
+  <!-- Pertanyaan Umum Seputar Sistem Grosir & MOQ -->
+  <Faq />
+  
+  <!-- Formulir Request Katalog & Peta Lokasi Pekuncen -->
+  <Kontak />
+  
+  <!-- Kaki Halaman & Informasi Legalitas Perusahaan -->
+  <Footer />
 
-   </Layout>
+</Layout>
+

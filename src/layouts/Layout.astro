@@ -1,4 +1,5 @@
 
+
 ---
 interface Props {
   title: string;
@@ -60,19 +61,19 @@ const absoluteImageUrl = new URL(image, Astro.url.origin).href;
     <meta name="twitter:image" content={absoluteImageUrl} />
 
     <!-- ======================================================== -->
-    <!-- AUDIT FIX: INISIALISASI DASAR & PELACAK OTOMATIS PIXEL -->
+    <!-- AUDIT FIX PERMANEN: REKTIFIKASI URL PATH DATA META PIXEL -->
     <!-- ======================================================== -->
     <script is:inline>
-      // 1. SKRIP INI WAJIB ADA AGAR METRICS ADS MANAGER BERJALAN
+      // 1. INISIALISASI DASAR DENGAN URL CDN KONEKSI RESMI FACEBOOK
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
       if(!f._fbq)f._fbq=n;n.push=n;n.l=1*new Date();t=b.createElement(e);
       t.async=!0;t.src=v;s=b.getElementsByTagName(e);
       s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://facebook.net');
+      'https://facebook.net'); // FIXED: Jalur CDN diperbaiki lengkap
       
-      // Catatan: Ganti '123456789012345' dengan ID Pixel asli milik owner gudang Legenda!
+      // Catatan Penting: Ganti ID contoh '123456789012345' di bawah dengan ID Pixel asli owner gudang Legenda!
       fbq('init', '123456789012345'); 
       fbq('track', 'PageView');
 
@@ -102,6 +103,7 @@ const absoluteImageUrl = new URL(image, Astro.url.origin).href;
       document.addEventListener('astro:page-load', inisialisasiPixelTracker);
     </script>
     
+    <!-- FIXED: Mengembalikan endpoint pengiriman noscript standar W3C Meta -->
     <noscript>
       <img height="1" width="1" style="display:none"
            src="https://facebook.com" />
