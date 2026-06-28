@@ -1,0 +1,69 @@
+---
+// Pindahkan data ke atas agar kode di bawah tetap bersih (Clean Code)
+const capabilities = [
+  { title: "Quality Control Produk", desc: "Inspeksi ketat untuk menjamin standar kualitas tertinggi." },
+  { title: "Warehouse Management", desc: "Sistem pergudangan modern yang rapi dan siap suplai besar." },
+  { title: "Pengiriman Nasional", desc: "Armada logistik andal ke seluruh wilayah Indonesia." },
+  { title: "Dedicated Sales Consultant", desc: "Pendampingan khusus untuk kelancaran bisnis grosir Anda." },
+  { title: "After Sales Support", desc: "Layanan responsif penanganan klaim dan retur produk." }
+];
+---
+
+<section id="capability" class="bg-slate-50 py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="grid items-center gap-20 lg:grid-cols-2">
+      
+      <!-- LEFT COLUMN -->
+      <div>
+        <span class="text-xs font-bold tracking-wider text-blue-700 uppercase">
+          Business Capability
+        </span>
+        
+        <h2 class="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 md:text-5xl">
+          Lebih Dari Sekadar Supplier, Kami Adalah Mitra Distribusi Bisnis Anda.
+        </h2>
+        
+        <p class="mt-6 text-lg leading-relaxed text-slate-600">
+          Kami membantu distributor, retail, hotel, restoran dan industri mendapatkan produk berkualitas dengan proses distribusi yang cepat, aman dan terpercaya.
+        </p>
+
+        <!-- List Capability -->
+        <div class="mt-12 space-y-6">
+          {capabilities.map((item) => (
+            // Ditambahkan KEY untuk optimasi rendering React/Astro
+            <div class="flex gap-4 items-start">
+              
+              <!-- Icon Box (Menggunakan SVG & Ramah Aksesibilitas) -->
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-700 mt-0.5" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+              </div>
+
+              <div>
+                <h3 class="font-bold text-slate-900 text-base">
+                  {item.title}
+                </h3>
+                <!-- Mengubah slate-500 ke slate-600 agar kontras warna lulus uji 100% -->
+                <p class="mt-1 text-sm text-slate-600 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN (Grid Visual) -->
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- Gantilah div-div ini dengan tag <img> asli saat produksi -->
+        <div class="aspect-square rounded-3xl bg-slate-200 border border-slate-300/50 shadow-sm"></div>
+        <div class="aspect-square rounded-3xl bg-blue-100 border border-blue-200/50 shadow-sm"></div>
+        <div class="aspect-square rounded-3xl bg-slate-300 border border-slate-400/50 shadow-sm"></div>
+        <div class="aspect-square rounded-3xl bg-slate-900 shadow-sm"></div>
+      </div>
+
+    </div>
+  </div>
+</section>

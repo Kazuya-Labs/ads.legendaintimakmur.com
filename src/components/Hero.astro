@@ -1,0 +1,169 @@
+
+---
+import { Icon } from 'astro-icon/components';
+
+// 1. KOREKSI NAMA IKON: Memperbaiki string nama ikon mdi agar ter-render sempurna
+const features = [
+  {
+    title: "Quality Control Ketat",
+    description: "Setiap produk melalui sortir manual untuk menjamin standar bebas cacat.",
+    icon: "mdi:marker-check"  
+  },
+  {
+    title: "Pengiriman Nasional",
+    description: "Kapasitas besar, packing karung double + dus tebal, aman ke seluruh Indonesia.",
+    icon: "mdi:truck-delivery" 
+  },
+  {
+    title: "Harga Kompetitif",
+    description: "Skema harga khusus langsung dari tangan pertama untuk margin keuntungan maksimal.",
+    icon: "mdi:cash-multiple"  
+  },
+  {
+    title: "Sales Responsif",
+    description: "Layanan kemitraan cepat via dedicated WhatsApp (Senin - Sabtu | 08.00 - 17.00 WIB).",
+    icon: "mdi:whatsapp"  
+  },
+];
+---
+
+<section class="py-16 bg-slate-50/50" id="hero"> 
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+    
+    <!-- SISI KIRI: PENAWARAN TEKS UTAMA -->
+    <div>
+      <div class="mb-8">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">Distributor Resmi B2B</span>
+        <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight leading-tight">
+          Suplier Peralatan Rumah Tangga Tangan Pertama
+        </h1>
+        <p class="text-sm sm:text-base text-slate-600 mt-2">
+          Siap menyuplai kebutuhan toko, tender, dan korporasi dengan kapasitas besar dan kontinuitas terjamin.
+        </p>
+      </div>
+
+      <!-- GRID KEUNGGULAN UTAMA -->
+      <div class="grid sm:grid-cols-2 gap-4">
+        {features.map((feature) => (
+          <div class="flex items-start gap-3 p-3.5 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200">
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 mt-0.5">
+              <!-- Memperbesar sedikit ukuran visual icon dari 50% menjadi w-5 h-5 agar seimbang -->
+              <Icon name={feature.icon} class="w-5 h-5" />
+            </div>
+            <div>
+              <p class="font-bold text-sm text-slate-800">{feature.title}</p>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">{feature.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- TOMBOL AKSI UTAMA (Diintegrasikan Atribut Meta Pixel Otomatis) -->
+      <div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
+        <a
+          href="#kontak"
+          data-pixel-event="Contact"
+          data-pixel-name="Minta Brosur Hero"
+          class="w-full sm:flex-1 text-center rounded-xl bg-emerald-600 px-8 py-4 font-bold text-white shadow-lg shadow-emerald-600/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-xl focus:ring-4 focus:ring-emerald-100 text-sm whitespace-nowrap"
+        >
+          Hubungi Sales / Minta Brosur Harga
+        </a>
+        <a
+          href="#produk"
+          data-pixel-event="ViewContent"
+          data-pixel-name="Lihat Katalog Hero"
+          class="w-full sm:w-auto text-center rounded-xl border border-slate-300 bg-white px-8 py-4 font-bold text-slate-600 transition-all duration-200 hover:bg-slate-50 hover:text-slate-900 text-sm"
+        >
+          Lihat Katalog
+        </a>
+      </div>
+    </div>
+
+    <!-- SISI KANAN: DOKUMENTASI VISUAL & BADGE BADGE LIVE -->
+    <div class="relative mt-10 lg:mt-0">
+      <div class="overflow-hidden rounded-[24px] border border-slate-100 bg-white shadow-xl">
+        <img
+          src="/produksi.jpg"
+          alt="Gudang Distribusi Peralatan Rumah Tangga Legenda Inti Makmur"
+          class="aspect-[4/3] w-full object-cover"
+          loading="eager" 
+        />
+      </div>
+
+      <!-- BADGE 1: COUNTER STOK PRODUK -->
+      <div class="absolute -bottom-6 -left-6 hidden rounded-2xl border border-slate-100 bg-white p-5 shadow-xl lg:block">
+        <div class="flex items-center gap-4">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+            <!-- Optimasi ukuran komponen icon -->
+            <Icon name='mdi:package-variant-closed-check' class="w-6 h-6" />
+          </div>
+          <div>
+            <h3 class="text-2xl font-black text-slate-900">
+              <span id="counter-trigger" data-target="200" data-duration="1800">1</span>+
+            </h3>
+            <p class="text-xs font-bold text-slate-500">Produk Siap Kirim</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BADGE 2: LIVE PULSE UPDATE STATUS -->
+      <div class="absolute -right-6 top-10 hidden rounded-2xl border border-slate-100 bg-white py-3.5 px-5 shadow-lg lg:block">
+        <div class="flex items-center gap-3">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <div>
+            <p class="font-bold text-sm text-slate-900">Ready Stock</p>
+            <p class="text-[11px] font-bold text-slate-500">Update Hari Ini</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SCRIPT ANIMASI COUNTER INTERAKTIF -->
+<script is:inline>
+  function jalankanAnimasiCounter() {
+    const elemenCounter = document.getElementById('counter-trigger');
+    if (!elemenCounter) return;
+
+    const targetAngka = parseInt(elemenCounter.getAttribute('data-target') || '0', 10);
+    const durasi = parseInt(elemenCounter.getAttribute('data-duration') || '1000', 10);
+    
+    let waktuMulai = null;
+
+    function step(timestamp) {
+      if (!waktuMulai) waktuMulai = timestamp;
+      const progress = timestamp - waktuMulai;
+      const hitung = Math.min(Math.floor((progress / durasi) * targetAngka), targetAngka);
+      
+      elemenCounter.textContent = hitung.toLocaleString('id-ID');
+
+      if (progress < durasi) {
+        window.requestAnimationFrame(step);
+      } else {
+        elemenCounter.textContent = targetAngka.toLocaleString('id-ID');
+      }
+    }
+
+    // Menggunakan Intersection Observer agar animasi berjalan HANYA saat elemen masuk ke layar
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          window.requestAnimationFrame(step);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(elemenCounter);
+  }
+
+  // Jalankan fungsi setelah DOM siap
+  document.addEventListener('DOMContentLoaded', jalankanAnimasiCounter);
+  document.addEventListener('astro:page-load', jalankanAnimasiCounter);
+</script>
+

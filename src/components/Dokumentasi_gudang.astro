@@ -1,0 +1,85 @@
+
+---
+import FacebookVideo from './ui/FacebookVideo.astro';
+
+// DATA LINK REEL DOKUMENTASI RESMI DARI FACEBOOK REEL CLIENT
+const links = ["https://web.facebook.com/reel/2427637867711251"];
+---
+
+<section id="dokumentasi-gudang" class="bg-slate-50 py-20 lg:py-24 border-b border-slate-200/60">
+  <div class="mx-auto max-w-7xl px-6">
+    
+    <!-- HEADER UTAMA SECTION -->
+    <div class="text-center max-w-3xl mx-auto">
+      <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full">
+        Bukti Fisik Gudang
+      </span>
+      <h2 class="mt-4 text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">
+        Punya Penghasilan Bukan Sekadar Mimpi!<br class="hidden sm:inline"/> 
+        Bergabunglah Menjadi Mitra Distribusi <span class="text-blue-600">Legenda Inti Makmur</span>.
+      </h2>
+      <p class="mt-2 text-xs sm:text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
+        Tonton langsung cuplikan dokumentasi riil aktivitas harian pembongkaran, sortir stok, dan kesiapan operasional di gudang utama kami.
+      </p>
+    </div>
+
+    <!-- TATA LETAK GRID -->
+    <div class="mt-14 max-w-4xl mx-auto grid gap-8 grid-cols-1 md:grid-cols-12 items-center">
+      
+      <!-- SISI KIRI: PEMUTAR VIDEO FACEBOOK REEL (DIOPTIMALKAN DENGAN ATRIBUT PIXEL) -->
+      <div class="md:col-span-5 flex justify-center">
+        {links.map((link) => (
+          <div 
+            data-pixel-event="ViewContent"
+            data-pixel-name="Tonton Reel Gudang"
+            class="w-full max-w-[280px] p-3 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group relative cursor-pointer"
+          >
+            <div class="aspect-[9/16] w-full rounded-xl overflow-hidden bg-slate-950 shadow-inner">
+              <FacebookVideo url={link} />
+            </div>
+            <span class="absolute -top-2 -right-2 text-[9px] font-bold bg-blue-600 text-white px-2 py-1 rounded-md shadow-sm uppercase tracking-wider">
+              Video Riil
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <!-- SISI KANAN: POIN VALIDASI FISIK -->
+      <div class="md:col-span-7 space-y-5">
+        <div class="p-5 bg-white border border-slate-100 rounded-xl shadow-sm">
+          <h3 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Aktivitas Distribusi Transparan
+          </h3>
+          <p class="mt-2 text-xs leading-relaxed text-slate-500">
+            Klip video di samping diambil langsung dari dokumentasi halaman resmi media sosial kami. Ini membuktikan rantai distribusi fisik barang di gudang kami bergerak aktif melayani pengiriman harian.
+          </p>
+        </div>
+
+        <div class="p-5 bg-white border border-slate-100 rounded-xl shadow-sm">
+          <h3 class="text-sm sm:text-base font-bold text-slate-900">
+            Jaminan Harga Tangan Pertama
+          </h3>
+          <p class="mt-2 text-xs leading-relaxed text-slate-500">
+            Tanpa perantara agen fiktif. Seluruh komoditas alat kebersihan rumah tangga, keset bal-balan, dan perabot plastik unik disuplai konstan dari titik pusat logistik kami di Pekuncen, Banyumas.
+          </p>
+        </div>
+
+        <div class="pt-2 text-center md:text-left">
+          <!-- OPTIMASI PIXEL: Ditambahkan pemicu event Contact saat tombol menuju form diklik -->
+          <a
+            href="#kontak"
+            data-pixel-event="Contact"
+            data-pixel-name="Klik Cek Prosedur Pengiriman"
+            class="inline-block text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors group/link"
+          >
+            Pelajari Prosedur Pengiriman Grosir Kami <span class="inline-block transform group-hover/link:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+

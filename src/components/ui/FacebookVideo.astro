@@ -1,0 +1,10 @@
+---
+const {width="auto",url=null,lazy="true",allowfullscreen="true"} = Astro.props
+---
+
+
+<div class="w-full h-full">
+  <div class="fb-video w-full" data-href={url}
+    data-allowfullscreen={allowfullscreen} data-width={width} data-lazy={lazy}>
+  </div>
+</div>

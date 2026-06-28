@@ -1,0 +1,177 @@
+
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string; 
+  canonicalURL?: string; 
+}
+
+const {
+  title,
+  description,
+  image = "/og-image.png", 
+  canonicalURL = Astro.url.href, 
+} = Astro.props;
+
+const absoluteImageUrl = new URL(image, Astro.url.origin).href;
+---
+
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <!-- Keamanan & Teknis Dasar -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Favicon & Icons Resmi (Dipastikan fallback aman) -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Legenda Inti Makmur" />
+
+    <!-- SEO Utama -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="PT Legenda Inti Makmur, Nagata, alat kebersihan, perabotan plastik, pabrik plastik Banyumas, solusi kebersihan rumah"
+    />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={absoluteImageUrl} /> 
+    <meta property="og:image:alt" content={`Gambar pratinjau untuk ${title}`} />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="PT Legenda Inti Makmur" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImageUrl} />
+
+    <!-- ======================================================== -->
+    <!-- AUDIT FIX: INISIALISASI DASAR & PELACAK OTOMATIS PIXEL -->
+    <!-- ======================================================== -->
+    <script is:inline>
+      // 1. SKRIP INI WAJIB ADA AGAR METRICS ADS MANAGER BERJALAN
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.l=1*new Date();t=b.createElement(e);
+      t.async=!0;t.src=v;s=b.getElementsByTagName(e);
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://facebook.net');
+      
+      // Catatan: Ganti '123456789012345' dengan ID Pixel asli milik owner gudang Legenda!
+      fbq('init', '123456789012345'); 
+      fbq('track', 'PageView');
+
+      // 2. DETEKSI ATRIBUT DATA-PIXEL-EVENT SECARA MODULAR
+      function inisialisasiPixelTracker() {
+        const elemenTerlacak = document.querySelectorAll('[data-pixel-event]');
+        elemenTerlacak.forEach((elemen) => {
+          elemen.removeEventListener('click', kirimEventPixel);
+          elemen.addEventListener('click', kirimEventPixel);
+        });
+      }
+
+      function kirimEventPixel(e) {
+        const el = e.currentTarget;
+        const eventName = el.getAttribute('data-pixel-event');
+        if (typeof fbq === 'function' && eventName) {
+          const contentName = el.getAttribute('data-pixel-name');
+          if (contentName) {
+            fbq('track', eventName, { content_name: contentName });
+          } else {
+            fbq('track', eventName);
+          }
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', inisialisasiPixelTracker);
+      document.addEventListener('astro:page-load', inisialisasiPixelTracker);
+    </script>
+    
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://facebook.com" />
+    </noscript>
+  </head>
+
+  <body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+    
+    <!-- 
+      AUDIT FIX: 
+      Menambahkan kelas pt-20 (Padding Top 80px) agar konten web di bawah slot 
+      tidak tertutup amblas oleh Navbar fixed top yang melayang di atas.
+    -->
+    <main class="flex-grow pt-20">
+      <slot />
+    </main>
+
+    <!-- ======================================================== -->
+    <!-- AUDIT FIX: INTEGRASI ANIMASI COUNTER AMAN (INTERSECTION OBSERVER) -->
+    <!-- ======================================================== -->
+    <script is:inline>
+      function jalankanAnimasiCounter() {
+        const counterEl = document.getElementById("counter-trigger");
+        if (!counterEl) return;
+
+        const target = parseInt(counterEl.getAttribute("data-target") || "200", 10);
+        const duration = parseInt(counterEl.getAttribute("data-duration") || "1800", 10); // Diselaraskan ke 1800ms
+        
+        let hasAnimated = false;
+
+        function startCountUp() {
+          let startTime = null;
+          const startValue = 1;
+
+          function updateNumber(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing Out Quad untuk kelancaran rendering fps di Google Chrome Mobile
+            const easeOutQuad = progress * (2 - progress);
+            const currentValue = Math.floor(easeOutQuad * (target - startValue) + startValue);
+
+            counterEl.textContent = currentValue.toLocaleString('id-ID');
+
+            if (elapsed < duration) {
+              requestAnimationFrame(updateNumber);
+            } else {
+              counterEl.textContent = target.toLocaleString('id-ID');
+            }
+          }
+          requestAnimationFrame(updateNumber);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAnimated) {
+              hasAnimated = true;
+              startCountUp();
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2 });
+
+        observer.observe(counterEl);
+      }
+
+      document.addEventListener("DOMContentLoaded", jalankanAnimasiCounter);
+      document.addEventListener("astro:page-load", jalankanAnimasiCounter);
+    </script>
+  </body>
+</html>
+
