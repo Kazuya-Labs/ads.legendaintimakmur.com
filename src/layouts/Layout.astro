@@ -1,18 +1,18 @@
-
-
 ---
 interface Props {
   title: string;
   description: string;
-  image?: string; 
-  canonicalURL?: string; 
+  image?: string;
+  canonicalURL?: string;
 }
+
+import "../styles/global.css";
 
 const {
   title,
   description,
-  image = "/og-image.png", 
-  canonicalURL = Astro.url.href, 
+  image = "/og-image.png",
+  canonicalURL = Astro.url.href,
 } = Astro.props;
 
 const absoluteImageUrl = new URL(image, Astro.url.origin).href;
@@ -26,7 +26,7 @@ const absoluteImageUrl = new URL(image, Astro.url.origin).href;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Favicon & Icons Resmi (Dipastikan fallback aman) -->
+    <!-- Favicon & Icons Resmi -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -48,7 +48,7 @@ const absoluteImageUrl = new URL(image, Astro.url.origin).href;
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={absoluteImageUrl} /> 
+    <meta property="og:image" content={absoluteImageUrl} />
     <meta property="og:image:alt" content={`Gambar pratinjau untuk ${title}`} />
     <meta property="og:locale" content="id_ID" />
     <meta property="og:site_name" content="PT Legenda Inti Makmur" />
@@ -61,77 +61,127 @@ const absoluteImageUrl = new URL(image, Astro.url.origin).href;
     <meta name="twitter:image" content={absoluteImageUrl} />
 
     <!-- ======================================================== -->
-    <!-- AUDIT FIX PERMANEN: REKTIFIKASI URL PATH DATA META PIXEL -->
+    <!-- AUDIT PRODUCTION-READY: SKRIP GLOBAL DIKENDALIKAN ASTRO -->
     <!-- ======================================================== -->
-    <script is:inline>
-      // 1. INISIALISASI DASAR DENGAN URL CDN KONEKSI RESMI FACEBOOK
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.l=1*new Date();t=b.createElement(e);
-      t.async=!0;t.src=v;s=b.getElementsByTagName(e);
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://facebook.net'); // FIXED: Jalur CDN diperbaiki lengkap
-      
-      // Catatan Penting: Ganti ID contoh '123456789012345' di bawah dengan ID Pixel asli owner gudang Legenda!
-      fbq('init', '123456789012345'); 
-      fbq('track', 'PageView');
+    <script>
+      // Buat interface pendukung agar kompatibel dengan TypeScript Astro
+      interface CustomWindow extends Window {
+        fbq?: any;
+        _fbq?: any;
+        hasPageViewFired?: boolean;
+      }
+      const w = window as unknown as CustomWindow;
 
-      // 2. DETEKSI ATRIBUT DATA-PIXEL-EVENT SECARA MODULAR
+      // 1. INJEKSI UTAMA DENGAN URL CDN KONEKSI RESMI FACEBOOK
+      if (!w.fbq) {
+        w.fbq = function (...args: any[]) {
+          w.fbq.callMethod ? w.fbq.callMethod(...args) : w.fbq.queue.push(args);
+        };
+        if (!w._fbq) w._fbq = w.fbq;
+        w.fbq.push = w.fbq;
+        w.fbq.loaded = true;
+        w.fbq.version = "2.0";
+        w.fbq.queue = [];
+
+        const t = document.createElement("script");
+        t.async = true;
+        t.src = "https://connect.facebook.net/en_US/fbevents.js";
+        const s = document.getElementsByTagName("script")[0];
+        s.parentNode?.insertBefore(t, s);
+      }
+
+      // 2. KONFIGURASI AWAL PIXEL (URUTAN WAJIB AMAN)
+      w.fbq("init", "1648898149501656");
+
+      // FIX 1: Matikan sensor otomatis Meta SEBELUM memicu PageView pertama
+      w.fbq("set", "autoConfig", false, "1648898149501656");
+
+      // FIX 2: Jalankan PageView manual (Hanya 1 kali saja dengan pengunci Boolean)
+      if (!w.hasPageViewFired) {
+        w.fbq("track", "PageView");
+        w.hasPageViewFired = true;
+      }
+
+      // 3. DETEKSI EVENT KLIK DATA-PIXEL-EVENT (MENDUKUNG VIEW TRANSITIONS ASTRO)
       function inisialisasiPixelTracker() {
-        const elemenTerlacak = document.querySelectorAll('[data-pixel-event]');
+        const elemenTerlacak = document.querySelectorAll("[data-pixel-event]");
         elemenTerlacak.forEach((elemen) => {
-          elemen.removeEventListener('click', kirimEventPixel);
-          elemen.addEventListener('click', kirimEventPixel);
+          elemen.removeEventListener("click", kirimEventPixel);
+          elemen.addEventListener("click", kirimEventPixel);
         });
       }
 
-      function kirimEventPixel(e) {
-        const el = e.currentTarget;
-        const eventName = el.getAttribute('data-pixel-event');
-        if (typeof fbq === 'function' && eventName) {
-          const contentName = el.getAttribute('data-pixel-name');
-          if (contentName) {
-            fbq('track', eventName, { content_name: contentName });
+      function kirimEventPixel(e: Event) {
+        const targetElemen = (e.target as HTMLElement).closest(
+          "[data-pixel-event]",
+        );
+        if (!targetElemen) return;
+
+        const eventName = targetElemen.getAttribute("data-pixel-event");
+
+        if (typeof w.fbq === "function" && eventName) {
+          const contentName =
+            targetElemen.getAttribute("data-pixel-name") || "";
+
+          // Daftar Event Standar Meta Anda
+          const daftarEventStandar = ["Contact", "Lead"];
+
+          if (daftarEventStandar.includes(eventName)) {
+            w.fbq("track", eventName, { content_name: contentName });
           } else {
-            fbq('track', eventName);
+            w.fbq("trackCustom", eventName, {
+              button_name: contentName,
+              target_anchor: targetElemen.getAttribute("href") || "",
+            });
           }
         }
       }
 
-      document.addEventListener('DOMContentLoaded', inisialisasiPixelTracker);
-      document.addEventListener('astro:page-load', inisialisasiPixelTracker);
+      // Jalankan otomatis pada siklus muat halaman Astro
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", inisialisasiPixelTracker);
+      } else {
+        inisialisasiPixelTracker();
+      }
+
+      document.addEventListener("astro:page-load", inisialisasiPixelTracker);
     </script>
-    
-    <!-- FIXED: Mengembalikan endpoint pengiriman noscript standar W3C Meta -->
+
+    <!-- FIXED: Menggunakan endpoint noscript dengan parameter pelacakan Meta resmi -->
     <noscript>
-      <img height="1" width="1" style="display:none"
-           src="https://facebook.com" />
+      <img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=1648898149501656&ev=PageView&noscript=1"
+      />
     </noscript>
   </head>
 
-  <body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
-    
-    <!-- 
-      AUDIT FIX: 
-      Menambahkan kelas pt-20 (Padding Top 80px) agar konten web di bawah slot 
-      tidak tertutup amblas oleh Navbar fixed top yang melayang di atas.
-    -->
+  <body
+    class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col"
+  >
     <main class="flex-grow pt-20">
       <slot />
     </main>
 
     <!-- ======================================================== -->
-    <!-- AUDIT FIX: INTEGRASI ANIMASI COUNTER AMAN (INTERSECTION OBSERVER) -->
+    <!-- INTEGRASI ANIMASI COUNTER AMAN (INTERSECTION OBSERVER) -->
     <!-- ======================================================== -->
     <script is:inline>
       function jalankanAnimasiCounter() {
         const counterEl = document.getElementById("counter-trigger");
         if (!counterEl) return;
 
-        const target = parseInt(counterEl.getAttribute("data-target") || "200", 10);
-        const duration = parseInt(counterEl.getAttribute("data-duration") || "1800", 10); // Diselaraskan ke 1800ms
-        
+        const target = parseInt(
+          counterEl.getAttribute("data-target") || "200",
+          10,
+        );
+        const duration = parseInt(
+          counterEl.getAttribute("data-duration") || "1800",
+          10,
+        );
+
         let hasAnimated = false;
 
         function startCountUp() {
@@ -143,30 +193,34 @@ const absoluteImageUrl = new URL(image, Astro.url.origin).href;
             const elapsed = timestamp - startTime;
             const progress = Math.min(elapsed / duration, 1);
 
-            // Easing Out Quad untuk kelancaran rendering fps di Google Chrome Mobile
             const easeOutQuad = progress * (2 - progress);
-            const currentValue = Math.floor(easeOutQuad * (target - startValue) + startValue);
+            const currentValue = Math.floor(
+              easeOutQuad * (target - startValue) + startValue,
+            );
 
-            counterEl.textContent = currentValue.toLocaleString('id-ID');
+            counterEl.textContent = currentValue.toLocaleString("id-ID");
 
             if (elapsed < duration) {
               requestAnimationFrame(updateNumber);
             } else {
-              counterEl.textContent = target.toLocaleString('id-ID');
+              counterEl.textContent = target.toLocaleString("id-ID");
             }
           }
           requestAnimationFrame(updateNumber);
         }
 
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting && !hasAnimated) {
-              hasAnimated = true;
-              startCountUp();
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.2 });
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+                startCountUp();
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 },
+        );
 
         observer.observe(counterEl);
       }
@@ -176,4 +230,3 @@ const absoluteImageUrl = new URL(image, Astro.url.origin).href;
     </script>
   </body>
 </html>
-

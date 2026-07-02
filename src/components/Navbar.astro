@@ -1,6 +1,5 @@
-
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 // REFAKTOR DATA: Menyelaraskan nama & ID target lompatan menu sesuai dengan komponen riil kita
 const menus = [
@@ -16,14 +15,19 @@ const menus = [
   class="fixed top-0 left-0 right-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-xl transition-all duration-300"
 >
   <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-
     <!-- LOGO UTAMA: Menggunakan kombinasi andalan Anda yang terbukti presisi -->
-    <a href="#hero" class="flex items-center gap-3 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700 rounded-lg" aria-label="PT Legenda Inti Makmur - Kembali ke Beranda">
-      <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-700 to-blue-900 text-white shadow-md">
+    <a
+      href="#hero"
+      class="flex items-center gap-3 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700 rounded-lg"
+      aria-label="PT Legenda Inti Makmur - Kembali ke Beranda"
+    >
+      <div
+        class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-700 to-blue-900 text-white shadow-md"
+      >
         <!-- Struktur Gambar Asli Anda (Dioptimalkan ke loading="eager" agar langsung muncul tanpa delay) -->
-        <img 
-          src="/og-image.jpg" 
-          alt="Logo resmi Legenda Inti Makmur" 
+        <img
+          src="/og-image.jpg"
+          alt="Logo resmi Legenda Inti Makmur"
           loading="eager"
           class="rounded-full w-full h-full object-contain"
         />
@@ -33,7 +37,9 @@ const menus = [
         <span class="block text-lg font-black tracking-tight text-slate-900">
           LEGENDA
         </span>
-        <span class="block -mt-1 text-xs font-bold tracking-[0.18em] text-slate-600">
+        <span
+          class="block -mt-1 text-xs font-bold tracking-[0.18em] text-slate-600"
+        >
           INTI MAKMUR
         </span>
       </div>
@@ -45,6 +51,8 @@ const menus = [
         menus.map((menu) => (
           <a
             href={menu.href}
+            data-pixel-event="ClickInternalNav"
+            data-pixel-name={`Nav Desktop: ${menu.name}`}
             class="text-[15px] font-semibold text-slate-700 transition hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700 rounded"
           >
             {menu.name}
@@ -62,14 +70,14 @@ const menus = [
         aria-label="Hubungi kami melalui telepon di +62 822 2115 5363"
       >
         <Icon name="mdi:phone" class="w-4 h-4 text-slate-400" />
-        0822-2115-5363 
+        0822-2115-5363
       </a>
 
       <!-- OPTIMASI PIXEL: Menyisipkan atribut pelacak otomatis 'data-pixel-event' -->
       <a
         href="#kontak"
-        data-pixel-event="Contact"
-        data-pixel-name="Klik Minta Penawaran Navbar Desktop"
+        data-pixel-event="ClickInternalNav"
+        data-pixel-name={`Nav Desktop: Kontak`}
         class="rounded-xl bg-blue-700 px-6 py-3 font-bold text-white text-sm shadow-md transition duration-200 hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
       >
         Minta Penawaran
@@ -84,11 +92,21 @@ const menus = [
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
-
   </div>
 
   <!-- Mobile Menu Layout -->
@@ -102,6 +120,8 @@ const menus = [
         menus.map((menu) => (
           <a
             href={menu.href}
+            data-pixel-event="ClickInternalNav"
+            data-pixel-name={`Nav Mobile: ${menu.name}`}
             class="py-4 text-base font-bold text-slate-700 hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700"
           >
             {menu.name}
@@ -113,8 +133,8 @@ const menus = [
         <!-- OPTIMASI PIXEL MOBILE: Menyisipkan pemicu event pelacak pada tombol mobile -->
         <a
           href="#kontak"
-          data-pixel-event="Contact"
-          data-pixel-name="Klik Minta Penawaran Navbar Mobile"
+          data-pixel-event="ClickInternalNav"
+          data-pixel-name="Nav Mobile: Kontak"
           class="block w-full rounded-xl bg-blue-700 py-4 text-center font-bold text-white hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
         >
           Minta Penawaran
@@ -129,7 +149,7 @@ const menus = [
   function inisialisasiMobileMenu() {
     const btn = document.getElementById("mobile-menu-btn");
     const menu = document.getElementById("mobile-menu");
-    const links = menu?.querySelectorAll('nav a');
+    const links = menu?.querySelectorAll("nav a");
 
     if (!btn || !menu) return;
 
@@ -137,7 +157,10 @@ const menus = [
     btn.addEventListener("click", () => {
       const isExpanded = btn.getAttribute("aria-expanded") === "true";
       btn.setAttribute("aria-expanded", !isExpanded);
-      btn.setAttribute("aria-label", isExpanded ? "Buka menu navigasi" : "Tutup menu navigasi");
+      btn.setAttribute(
+        "aria-label",
+        isExpanded ? "Buka menu navigasi" : "Tutup menu navigasi",
+      );
       menu.classList.toggle("hidden");
     });
 
@@ -165,4 +188,3 @@ const menus = [
   document.addEventListener("DOMContentLoaded", inisialisasiMobileMenu);
   document.addEventListener("astro:page-load", inisialisasiMobileMenu);
 </script>
-

@@ -44,6 +44,8 @@ const contactLinks = [
             <li>
               <a 
                 href={link.href} 
+                data-pixel-event="ClickInternalNav"
+                data-pixel-name={`Nav Footer: ${link.name}`}
                 class="transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 rounded"
               >
                 {link.name}
@@ -65,6 +67,8 @@ const contactLinks = [
                 href={link.href} 
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
+                data-pixel-event="ClickInternalNav"
+                data-pixel-name={`Nav Footer: ${link.name}`}
                 class="transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 rounded inline-flex items-center gap-1 group/link"
               >
                 {link.name}
