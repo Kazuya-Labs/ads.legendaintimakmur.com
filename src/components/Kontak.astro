@@ -1,4 +1,3 @@
-
 ---
 import { Icon } from "astro-icon/components";
 
@@ -6,91 +5,174 @@ import { Icon } from "astro-icon/components";
 const contactDetails = [
   {
     label: "Alamat Gudang Pusat",
-    value: "Jl. Kantil No.10, Legok, Pekuncen, Kecamatan Pekuncen, Kabupaten Banyumas, Jawa Tengah 53164",
-    href: "https://google.com",
-    isLink: true
+    value:
+      "Jl. Kantil No.10, Legok, Pekuncen, Kecamatan Pekuncen, Kabupaten Banyumas, Jawa Tengah 53164",
+    href: "https://google.com/maps/place/Legenda+inti+makmur/@-7.379366,109.082045,15z/data=!4m6!3m5!1s0x2e6563e5a1608205:0xa3d4fbcbd99d6d84!8m2!3d-7.379366!4d109.082045!16s%2Fg%2F11c1q9v_9k",
+    isLink: true,
   },
   {
     label: "Hotline Grosir (WhatsApp Only)",
     value: "0822-2115-5363",
-    href: "https://wa.me.",
-    isLink: true
-  }
+    href: "https://wa.me/6282221155363",
+    isLink: true,
+  },
 ];
 ---
 
 <section id="kontak" class="bg-slate-50 py-20 lg:py-28">
   <div class="mx-auto max-w-7xl px-6">
     <div class="grid gap-12 lg:grid-cols-5 items-start">
-      
       <!-- SISI KIRI: INFORMASI UTAMA DAN DETAIL KONTAK -->
       <div class="lg:col-span-2">
-        <span class="text-xs font-bold tracking-wider text-blue-600 uppercase bg-blue-50 px-3 py-1.5 rounded-full">
+        <span
+          class="text-xs font-bold tracking-wider text-blue-600 uppercase bg-blue-50 px-3 py-1.5 rounded-full"
+        >
           Hubungi Kami
         </span>
-        
-        <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+
+        <h2
+          class="mt-4 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl"
+        >
           Mulai Kerja Sama Distribusi Hari Ini
         </h2>
-        
-        <p class="mt-4 text-xs sm:text-sm leading-relaxed text-slate-500 font-medium">
-          Tim admin sales grosir kami siap membantu memberikan solusi suplai terbaik, menghitung kecocokan harga grosir untuk kuantitas Anda, serta mencarikan opsi pengiriman kargo yang paling hemat.
+
+        <p
+          class="mt-4 text-xs sm:text-sm leading-relaxed text-slate-500 font-medium"
+        >
+          Tim admin sales grosir kami siap membantu memberikan solusi suplai
+          terbaik, menghitung kecocokan harga grosir untuk kuantitas Anda, serta
+          mencarikan opsi pengiriman kargo yang paling hemat.
         </p>
 
         <div class="mt-10 space-y-6">
-          {contactDetails.map((detail) => (
-            <div class="border-l-2 border-blue-600 pl-4 py-1">
-              <h3 class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                {detail.label}
-              </h3>
-              
-              {detail.isLink ? (
-                <a 
-                  href={detail.href}
-                  target={detail.href.startsWith('http') ? "_blank" : undefined}
-                  data-pixel-event="clickExternalLink"
-                  data-pixel-name={`Contact Detail: ${detail.label}`}
-                  rel={detail.href.startsWith('http') ? "noopener noreferrer" : undefined}
-                  class="mt-1 inline-block text-sm sm:text-base font-bold text-slate-900 hover:text-blue-600 transition-colors duration-200 leading-tight"
-                >
-                  {detail.value}
-                </a>
-              ) : (
-                <p class="mt-1 text-sm sm:text-base font-bold text-slate-900 leading-relaxed">
-                  {detail.value}
-                </p>
-              )}
-            </div>
-          ))}
+          {
+            contactDetails.map((detail) => (
+              <div class="border-l-2 border-blue-600 pl-4 py-1">
+                <h3 class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  {detail.label}
+                </h3>
+
+                {detail.isLink ? (
+                  <a
+                    href={detail.href}
+                    target={
+                      detail.href.startsWith("http") ? "_blank" : undefined
+                    }
+                    data-pixel-event="clickExternalLink"
+                    data-pixel-name={`Contact Detail: ${detail.label}`}
+                    rel={
+                      detail.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    class="mt-1 inline-block text-sm sm:text-base font-bold text-slate-900 hover:text-blue-600 transition-colors duration-200 leading-tight"
+                  >
+                    {detail.value}
+                  </a>
+                ) : (
+                  <p class="mt-1 text-sm sm:text-base font-bold text-slate-900 leading-relaxed">
+                    {detail.value}
+                  </p>
+                )}
+              </div>
+            ))
+          }
         </div>
       </div>
 
       <!-- SISI KANAN: FORMULIR REQUEST CATALOG & JOIN GRUP WA -->
-      <div class="lg:col-span-3 rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
-        <h3 class="text-lg font-black text-slate-900">Formulir Permintaan Katalog & Daftar Harga</h3>
-        <p class="text-xs text-slate-500 mt-1 mb-6">Lengkapi data di bawah ini untuk mendapatkan katalog harga grosir terbaru dan info join grup WhatsApp.</p>
-        
+      <div
+        class="lg:col-span-3 rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm"
+      >
+        <h3 class="text-lg font-black text-slate-900">
+          Formulir Permintaan Katalog & Daftar Harga
+        </h3>
+        <p class="text-xs text-slate-500 mt-1 mb-6">
+          Lengkapi data di bawah ini untuk mendapatkan katalog harga grosir
+          terbaru dan info join grup WhatsApp.
+        </p>
+
         <form id="whatsapp-form" class="space-y-4">
           <div class="grid gap-4 sm:grid-cols-2">
             <div>
               <!-- Koreksi penulisan atribut for -->
-              <label for="nama_lengkap" class="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Nama Lengkap</label>
-              <input type="text" id="nama_lengkap" name="nama_lengkap" required class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm focus:border-blue-500 focus:bg-white focus:outline-none transition-colors" placeholder="Contoh: Budi Santoso" />
+              <label
+                for="nama_lengkap"
+                class="block text-[11px] font-bold uppercase tracking-wide text-slate-600"
+                >Nama Lengkap</label
+              >
+              <input
+                type="text"
+                id="nama_lengkap"
+                name="nama_lengkap"
+                required
+                class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm focus:border-blue-500 focus:bg-white focus:outline-none transition-colors"
+                placeholder="Contoh: Budi Santoso"
+              />
             </div>
             <div>
-              <label for="nama_perusahaan" class="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Nama Toko / Usaha / Kios</label>
-              <input type="text" id="nama_perusahaan" name="nama_perusahaan" required class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm focus:border-blue-500 focus:bg-white focus:outline-none transition-colors" placeholder="Contoh: Toko Maju Grosir" />
+              <label
+                for="nama_perusahaan"
+                class="block text-[11px] font-bold uppercase tracking-wide text-slate-600"
+                >Nama Toko / Usaha / Kios</label
+              >
+              <input
+                type="text"
+                id="nama_perusahaan"
+                name="nama_perusahaan"
+                required
+                class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm focus:border-blue-500 focus:bg-white focus:outline-none transition-colors"
+                placeholder="Contoh: Toko Maju Grosir"
+              />
             </div>
           </div>
 
           <div>
-            <label for="no_whatsapp" class="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Nomor WhatsApp Aktif</label>
-            <input type="tel" id="no_whatsapp" name="no_whatsapp" required class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm focus:border-blue-500 focus:bg-white focus:outline-none transition-colors" placeholder="Contoh: 08123456789" />
+            <label
+              for="no_whatsapp"
+              class="block text-[11px] font-bold uppercase tracking-wide text-slate-600"
+              >Nomor WhatsApp Aktif</label
+            >
+            <input
+              type="tel"
+              id="no_whatsapp"
+              name="no_whatsapp"
+              required
+              class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm focus:border-blue-500 focus:bg-white focus:outline-none transition-colors"
+              placeholder="Contoh: 08123456789"
+            />
           </div>
 
           <div>
-            <label for="kebutuhan" class="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Rencana Kebutuhan Produk & Kota Tujuan Kirim</label>
-            <textarea id="kebutuhan" name="kebutuhan" rows="3" required class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm focus:border-blue-500 focus:bg-white focus:outline-none transition-colors" placeholder="Jelaskan jenis perlengkapan yang Anda butuhkan (misal: alat pel, keset) beserta perkiraan jumlah dan kota tujuan kirim..."></textarea>
+            <label
+              for="alamat"
+              class="block text-[11px] font-bold uppercase tracking-wide text-slate-600"
+              >Alamat Lengkap</label
+            >
+            <input
+              type="text"
+              id="alamat"
+              name="alamat"
+              required
+              class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm focus:border-blue-500 focus:bg-white focus:outline-none transition-colors"
+              placeholder="Contoh: Jl. Merdeka No. 123, Kota Semarang"
+            />
+          </div>
+
+          <div>
+            <label
+              for="kebutuhan"
+              class="block text-[11px] font-bold uppercase tracking-wide text-slate-600"
+              >Rencana Kebutuhan Produk</label
+            >
+            <textarea
+              id="kebutuhan"
+              name="kebutuhan"
+              rows="3"
+              required
+              class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm focus:border-blue-500 focus:bg-white focus:outline-none transition-colors"
+              placeholder="Jelaskan jenis perlengkapan yang Anda butuhkan (misal: alat pel, keset) beserta perkiraan jumlah dan kota tujuan kirim..."
+            ></textarea>
           </div>
 
           <!-- OPTIMASI ATRIBUT PIXEL: data-pixel diubah menjadi data-pixel-event & data-pixel-name -->
@@ -104,39 +186,41 @@ const contactDetails = [
           </button>
         </form>
       </div>
-
     </div>
 
     <!-- PETA LOKASI GUDANG (MAPS ASLI DI PEKUNCEN, BANYUMAS) -->
-    <div class="mt-12 overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15827.090303458446!2d109.082045!3d-7.379366!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6563e5a1608205%3A0xa3d4fbcbd99d6d84!2sLegenda%20inti%20makmur!5e0!3m2!1sid!2sid!4v1782373012144!5m2!1sid!2sid"
+    <div
+      class="mt-12 overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-sm"
+    >
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15827.090303458446!2d109.082045!3d-7.379366!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6563e5a1608205%3A0xa3d4fbcbd99d6d84!2sLegenda%20inti%20makmur!5e0!3m2!1sid!2sid!4v1782373012144!5m2!1sid!2sid"
         class="h-64 sm:h-80 w-full rounded-xl bg-slate-100"
-        style="border:0;" 
+        style="border:0;"
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
         title="Peta Lokasi Gudang Pusat Legenda Inti Makmur di Pekuncen, Banyumas"
-      />
+      ></iframe>
     </div>
-
   </div>
 </section>
 
 <!-- SCRIPT PENGIRIMAN INTERAKTIF OTOMATIS KE WHATSAPP -->
 <script is:inline>
-  document.getElementById('whatsapp-form')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const nama = document.getElementById('nama_lengkap').value;
-    const toko = document.getElementById('nama_perusahaan').value;
-    const wa = document.getElementById('no_whatsapp').value;
-    const kebutuhan = document.getElementById('kebutuhan').value;
-    
-    const nomorAdmin = "6282221155363"; // Nomor WA resmi Legenda Inti Makmur
-    
-    const teksPesan = `Halo Admin Grosir Legenda Inti Makmur, saya mengisi formulir di website:%0A%0A*Nama:* ${encodeURIComponent(nama)}%0A*Toko/Usaha:* ${encodeURIComponent(toko)}%0A*WhatsApp:* ${encodeURIComponent(wa)}%0A*Kebutuhan %26 Tujuan:* ${encodeURIComponent(kebutuhan)}`;
-    
-    window.open(`https://wa.me/${nomorAdmin}?text=${teksPesan}`, '_blank');
-  });
-</script>
+  document
+    .getElementById("whatsapp-form")
+    ?.addEventListener("submit", function (e) {
+      e.preventDefault();
 
+      const nama = document.getElementById("nama_lengkap").value;
+      const toko = document.getElementById("nama_perusahaan").value;
+      const wa = document.getElementById("no_whatsapp").value;
+      const kebutuhan = document.getElementById("kebutuhan").value;
+
+      const nomorAdmin = "6282221155363"; // Nomor WA resmi Legenda Inti Makmur
+
+      const teksPesan = `Halo Admin Grosir Legenda Inti Makmur, saya mengisi formulir di website:%0A%0A*Nama:* ${encodeURIComponent(nama)}%0A*Toko/Usaha:* ${encodeURIComponent(toko)}%0A*WhatsApp:* ${encodeURIComponent(wa)}%0A*Kebutuhan %26 Tujuan:* ${encodeURIComponent(kebutuhan)}`;
+
+      window.open(`https://wa.me/${nomorAdmin}?text=${teksPesan}`, "_blank");
+    });
+</script>
