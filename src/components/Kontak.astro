@@ -215,11 +215,12 @@ const contactDetails = [
       const nama = document.getElementById("nama_lengkap").value;
       const toko = document.getElementById("nama_perusahaan").value;
       const wa = document.getElementById("no_whatsapp").value;
+      const alamat = document.getElementById("alamat").value;
       const kebutuhan = document.getElementById("kebutuhan").value;
 
       const nomorAdmin = "6282221155363"; // Nomor WA resmi Legenda Inti Makmur
 
-      const teksPesan = `Halo Admin Grosir Legenda Inti Makmur, saya mengisi formulir di website:%0A%0A*Nama:* ${encodeURIComponent(nama)}%0A*Toko/Usaha:* ${encodeURIComponent(toko)}%0A*WhatsApp:* ${encodeURIComponent(wa)}%0A*Kebutuhan %26 Tujuan:* ${encodeURIComponent(kebutuhan)}`;
+      const teksPesan = `Halo Admin Grosir Legenda Inti Makmur, saya mengisi formulir di website:%0A%0A*Nama:* ${encodeURIComponent(nama)}%0A*Toko/Usaha:* ${encodeURIComponent(toko)}%0A*WhatsApp:* ${encodeURIComponent(wa)}%0A*Alamat:* ${encodeURIComponent(alamat)}%0A*Kebutuhan : * ${encodeURIComponent(kebutuhan)}`;
 
       window.open(`https://wa.me/${nomorAdmin}?text=${teksPesan}`, "_blank");
     });
