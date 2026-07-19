@@ -1,36 +1,52 @@
-
 ---
 // Tautan internal modular (Diselaraskan dengan ID komponen riil kita)
 const companyLinks = [
   { name: "Tentang Kami", href: "#hero" },
   { name: "Katalog Produk", href: "#produk" },
-  { name: "Rekam Jejak Logistik", href: "#rekam-jejak" }, // Mengubah portfolio menjadi rekam-jejak
-  { name: "Pertanyaan (FAQ)", href: "#faq" }
+  { name: "Rekam Jejak Logistik", href: "#rekam-jejak" },
+  { name: "Pertanyaan (FAQ)", href: "#faq" },
 ];
 
-// Optimalisasi tautan kontak langsung
 const contactLinks = [
-  { name: "WhatsApp Business Chat", href: "https://wa.me/6282221155363", external: true }
+  {
+    name: "WhatsApp Business Chat",
+    href: "https://wa.me/6282221155363",
+    external: true,
+  },
+  {
+    name: "Saluran Kami",
+    href: "https://whatsapp.com/channel/0029Vb4TIMyElagsK3Rnjh2L",
+    external: true,
+  },
 ];
 ---
 
 <footer class="bg-slate-950 text-white border-t border-slate-900">
   <div class="mx-auto max-w-7xl px-6 py-16 md:py-20">
-    
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      
       <!-- Profil Perusahaan & Legalitas (Bahasanya di-bumikan sesuai realitas bisnis) -->
       <div>
         <span class="block text-xl font-black tracking-tight">
           LEGENDA <span class="text-blue-500">INTI MAKMUR</span>
         </span>
-        <p class="mt-4 text-xs sm:text-sm leading-relaxed text-slate-400 font-medium">
-          Supplier & Grosir Tangan Pertama Peralatan Rumah Tangga terpercaya untuk kebutuhan jaringan toko retail, agen grosir pasar tradisional, online shop, hingga pengadaan instansi daerah.
+        <p
+          class="mt-4 text-xs sm:text-sm leading-relaxed text-slate-400 font-medium"
+        >
+          Supplier & Grosir Tangan Pertama Peralatan Rumah Tangga terpercaya
+          untuk kebutuhan jaringan toko retail, agen grosir pasar tradisional,
+          online shop, hingga pengadaan instansi daerah.
         </p>
         <!-- Penambahan Trust Badge Informasi Kantor -->
         <div class="mt-6 text-xs text-slate-500 space-y-1 font-semibold">
-          <p>SLA Respons: <span class="text-slate-400">Senin - Sabtu (08.00 - 17.00 WIB)</span></p>
-          <p>Legalitas: <span class="text-slate-400">PT Legenda Inti Makmur</span></p>
+          <p>
+            SLA Respons: <span class="text-slate-400"
+              >Senin - Sabtu (08.00 - 17.00 WIB)</span
+            >
+          </p>
+          <p>
+            Legalitas: <span class="text-slate-400">PT Legenda Inti Makmur</span
+            >
+          </p>
         </div>
       </div>
 
@@ -40,18 +56,20 @@ const contactLinks = [
           Perusahaan
         </h2>
         <ul class="mt-4 space-y-3 text-sm text-slate-400 font-medium">
-          {companyLinks.map((link) => (
-            <li>
-              <a 
-                href={link.href} 
-                data-pixel-event="ClickInternalNav"
-                data-pixel-name={`Nav Footer: ${link.name}`}
-                class="transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 rounded"
-              >
-                {link.name}
-              </a>
-            </li>
-          ))}
+          {
+            companyLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  data-pixel-event="ClickInternalNav"
+                  data-pixel-name={`Nav Footer: ${link.name}`}
+                  class="transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 rounded"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
 
@@ -61,39 +79,58 @@ const contactLinks = [
           Hubungi Kami
         </h2>
         <ul class="mt-4 space-y-3 text-sm text-slate-400 font-medium">
-          {contactLinks.map((link) => (
-            <li>
-              <a 
-                href={link.href} 
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noopener noreferrer" : undefined}
-                data-pixel-event="ClickInternalNav"
-                data-pixel-name={`Nav Footer: ${link.name}`}
-                class="transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 rounded inline-flex items-center gap-1 group/link"
-              >
-                {link.name}
-                {link.external && (
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3 h-3 text-slate-600 group-hover/link:text-white transition-colors">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                  </svg>
-                )}
-              </a>
-            </li>
-          ))}
+          {
+            contactLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  data-pixel-event="ClickInternalNav"
+                  data-pixel-name={`Nav Footer: ${link.name}`}
+                  class="transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 rounded inline-flex items-center gap-1 group/link"
+                >
+                  {link.name}
+                  {link.external && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      class="w-3 h-3 text-slate-600 group-hover/link:text-white transition-colors"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                      />
+                    </svg>
+                  )}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
-
     </div>
 
     <!-- Garis Batas & Copyright -->
-    <div class="mt-16 border-t border-slate-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-medium">
-      <p>&copy; {new Date().getFullYear()} PT Legenda Inti Makmur. Seluruh hak cipta dilindungi undang-undang.</p>
+    <div
+      class="mt-16 border-t border-slate-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-medium"
+    >
+      <p>
+        &copy; {new Date().getFullYear()} PT Legenda Inti Makmur. Seluruh hak cipta
+        dilindungi undang-undang.
+      </p>
       <div class="flex gap-4">
-        <a href="#privacy" class="hover:text-slate-400 transition-colors">Kebijakan Privasi</a>
-        <a href="#terms" class="hover:text-slate-400 transition-colors">Syarat & Ketentuan</a>
+        <a href="#privacy" class="hover:text-slate-400 transition-colors"
+          >Kebijakan Privasi</a
+        >
+        <a href="#terms" class="hover:text-slate-400 transition-colors"
+          >Syarat & Ketentuan</a
+        >
       </div>
     </div>
-
   </div>
 </footer>
-
