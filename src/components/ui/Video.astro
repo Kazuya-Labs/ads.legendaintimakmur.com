@@ -1,0 +1,15 @@
+---
+// Menerima properti src untuk video dan poster untuk gambar cover
+const { src} = Astro.props
+---
+<div class="w-full h-full relative bg-slate-950">
+  <video 
+    controls 
+    preload="none"
+    class="w-full h-full object-cover"
+  >
+    <source src={src} type="video/mp4">
+    Browser Anda tidak mendukung tag video.
+  </video>
+</div>
+
