@@ -124,13 +124,15 @@ const absoluteImageUrl = new URL(image, Astro.url.origin).href;
             targetElemen.getAttribute("data-pixel-name") || "";
 
           // Daftar Event Standar Meta Anda
-          const daftarEventStandar = ["Contact", "Lead"];
+          const daftarEventStandar = ["Contact", "Lead","ClickInternalNav","clickInternalNav"];
 
           if (daftarEventStandar.includes(eventName)) {
             w.fbq("track", eventName, { content_name: contentName });
           } else {
             w.fbq("trackCustom", eventName, {
               button_name: contentName,
+              conten_type : contentName,
+              content_name:contentName,
               target_anchor: targetElemen.getAttribute("href") || "",
             });
           }
